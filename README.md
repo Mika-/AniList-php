@@ -1,6 +1,6 @@
 AniList-php
 ===================
-Fetch serie information from [anilist.co](https://anilist.co/)
+Fetch serie information from [anilist.co](http://anilist.co/)
 
 Uses curl for maximal network performance and xpath for dom traversal.
 
@@ -16,7 +16,7 @@ $serieInfo = $anilist->getSerie(14751);
 var_dump($serieInfo);
 ```
 
-Will output
+Will output information as easily readable array
 ```
 array(16) {
     ["id"]=> int(14751)

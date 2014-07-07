@@ -11,14 +11,17 @@ class Anilist {
 
         $data = $this->_parsePage($html, array(
             'serieInfo' => '//div[@id="animeInfo"]/ul[1]/li',
-            'serieImage' => '//img[@class="poster"]/@src'
+            'serieDescription' => '//div[@id="animeDes"]/text()',
+            'serieImage' => '//img[@class="poster"]/@src',
+            'serieRelations' => '//div[@id="animeRel"]/span/div/a'
         ));
 
-        if (count($data) > 0) {
+        if (isset($data['serieInfo'])) {
             
             $fields = array();
 
             $currentField = false;
+
             foreach($data['serieInfo'] as $node) {
                 
                 $children = $node->getElementsByTagName('span');
@@ -71,19 +74,50 @@ class Anilist {
                 'nameEnglish' => (isset($fields['Eng Title:']) ? $fields['Eng Title:'] : false),
                 'nameJapanese' => (isset($fields['Japanese:']) ? $fields['Japanese:'] : false),
                 'nameSynonym' => $fields['Synonym:'],
+                'description' => trim($data['serieDescription']->item(1)->nodeValue),
                 'image' => 'http://anilist.co' . trim($data['serieImage']->item(0)->nodeValue),
                 'type' => (isset($fields['Type:']) ? $fields['Type:'] : false),
-                'episodes' => (isset($fields['Episodes:']) ? $fields['Episodes:'] : false),
-                'duration' => (isset($fields['Duration:']) ? $fields['Duration:'] : false),
                 'status' => $fields['Status:'],
                 'start' => (isset($fields['Start:']) ? $fields['Start:'] : false),
                 'end' => (isset($fields['End:']) ? $fields['End:'] : false),
-                'studio' => (isset($fields['Main Work:']) ? $fields['Main Work:'] : false),
-                'producers' => $fields['Producers:'],
                 'genre' => $fields['Genres:'],
                 'score' => floatval($fields['Average Score:'])
             );
         
+            if ($type === 'manga') {
+            
+                $serieInfo['Volumes'] = (isset($fields['Volumes:']) ? $fields['Volumes:'] : false);
+                $serieInfo['Chapters'] = (isset($fields['Chapters:']) ? $fields['Chapters:'] : false);
+                $serieInfo['Serialized'] = (isset($fields['Serialized:']) ? $fields['Serialized:'] : false);
+                
+            }
+            else {
+
+                $serieInfo['episodes'] = (isset($fields['Episodes:']) ? $fields['Episodes:'] : false);
+                $serieInfo['duration'] = (isset($fields['Duration:']) ? $fields['Duration:'] : false);
+                $serieInfo['studio'] = (isset($fields['Main Work:']) ? $fields['Main Work:'] : false);
+                $serieInfo['producers'] = (isset($fields['Producers:']) ? $fields['Producers:'] : false);
+            
+            }
+            
+            $serieInfo['related'] = array();
+            
+            if (isset($data['serieRelations'])) {
+
+                foreach($data['serieRelations'] as $node) {
+
+                    $href = $node->getAttribute('href');
+                    $parts = explode('/', $href);
+
+                    $serieInfo['related'][] = array(
+                        'type' => $parts[1],
+                        'id' => $parts[2]
+                    );
+
+                }
+                
+            }
+            
         }
         else {
             $serieInfo = false;
