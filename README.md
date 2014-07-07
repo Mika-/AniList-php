@@ -11,7 +11,7 @@ Uses curl for maximal network performance and xpath for dom traversal.
 $anilist = new Anilist();
 
 // Get serie info by id
-$serieInfo = $anilist->getSerie(14751);
+$serieInfo = $anilist->getSerie(14751, 'anime');
 
 var_dump($serieInfo);
 ```
@@ -46,5 +46,28 @@ array(16) {
         [3]=> string(6) "Shoujo"
     }
     ["score"]=> float(74.7)
+}
+```
+
+You can also search series
+```php
+$series = $anilist->searchSerie('Onegai', 'anime');
+
+var_dump($series);
+```
+
+Outputs
+```
+array(2) {
+    [0]=> array(3) {
+        ["name"]=> string(16) "Onegai My Melody"
+        ["type"]=> string(5) "anime"
+        ["id"]=> string(4) "2489"
+    }
+    [1]=> array(3) {
+        ["name"]=> string(26) "Onegai My Melody Kirara☆"
+        ["type"]=> string(5) "anime"
+        ["id"]=> string(4) "5938"
+    }
 }
 ```

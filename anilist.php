@@ -120,11 +120,46 @@ class Anilist {
             
         }
         else {
+            
             $serieInfo = false;
+            
         }
         
         return $serieInfo;
         
+    }
+    
+    public function searchSerie($query, $type = 'anime') {
+        
+        $results = array();
+
+        $html = $this->_getPage('http://anilist.co/getSearch.php?q=' . strtolower($query) . '&type=' . $type);
+
+        $data = $this->_parsePage($html, array(
+            'serieInfo' => '//a'
+        ));
+        
+        if (isset($data['serieInfo'])) {
+
+            foreach($data['serieInfo'] as $node) {
+
+                $children = $node->getElementsByTagName('div');
+
+                $href = $node->getAttribute('href');
+                $parts = explode('/', $href);
+
+                $results[] = array(
+                    'name' => trim($children->item(0)->nodeValue),
+                    'type' => $parts[1],
+                    'id' => $parts[2]
+                );
+            
+            }
+            
+        }
+        
+        return $results;
+    
     }
 
     private function _parsePage($html, $selectors = array()) {
