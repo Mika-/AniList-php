@@ -34,11 +34,11 @@ array(16) {
         ["small"]=> string(45) "http://anilist.co/img/dir/anime/sml/14751.jpg"
     }
     ["type"]=> string(3) "ONA"
-    ["episodes"]=> string(2) "26"
+    ["episodes"]=> int(26)
     ["duration"]=> bool(false)
     ["status"]=> string(16) "currently airing"
-    ["start"]=> string(12) "Jul 05, 2014"
-    ["end"]=> bool(false)
+    ["dateStart"]=> string(10) "2014-07-05
+    ["dateEnd"]=> bool(false)
     ["studio"]=> string(14) "Toei Animation"
     ["producers"]=> array(1) {
         [0]=> string(14) "Toei Animation"
@@ -50,6 +50,16 @@ array(16) {
         [3]=> string(6) "Shoujo"
     }
     ["score"]=> float(74.7)
+    ["related"]=> array(2) {
+        [0]=> array(2) {
+            ["type"]=> string(5) "manga"
+            ["id"]=> int(92)
+        }
+        [1]=> array(2) {
+            ["type"]=> string(5) "anime"
+            ["id"]=> int(530)
+        }
+    }
 }
 ```
 
@@ -66,12 +76,12 @@ array(2) {
     [0]=> array(3) {
         ["name"]=> string(16) "Onegai My Melody"
         ["type"]=> string(5) "anime"
-        ["id"]=> string(4) "2489"
+        ["id"]=>  int(2489)
     }
     [1]=> array(3) {
         ["name"]=> string(26) "Onegai My Melody Kirara☆"
         ["type"]=> string(5) "anime"
-        ["id"]=> string(4) "5938"
+        ["id"]=>  int(5938)
     }
 }
 ```

@@ -81,22 +81,22 @@ class Anilist {
                 ),
                 'type' => (isset($fields['Type:']) ? $fields['Type:'] : false),
                 'status' => $fields['Status:'],
-                'start' => (isset($fields['Start:']) ? $fields['Start:'] : false),
-                'end' => (isset($fields['End:']) ? $fields['End:'] : false),
-                'genre' => $fields['Genres:'],
+                'dateStart' => (isset($fields['Start:']) ? date('Y-m-d', strtotime($fields['Start:'])) : false),
+                'dateEnd' => (isset($fields['End:']) ? date('Y-m-d', strtotime($fields['End:'])) : false),
+                'genre' => (isset($fields['Genres:']) ? $fields['Type:'] : array()),
                 'score' => floatval($fields['Average Score:'])
             );
         
             if ($type === 'manga') {
             
-                $serieInfo['Volumes'] = (isset($fields['Volumes:']) ? $fields['Volumes:'] : false);
-                $serieInfo['Chapters'] = (isset($fields['Chapters:']) ? $fields['Chapters:'] : false);
+                $serieInfo['Volumes'] = (isset($fields['Volumes:']) ? intval($fields['Volumes:']) : false);
+                $serieInfo['Chapters'] = (isset($fields['Chapters:']) ? intval($fields['Chapters:']) : false);
                 $serieInfo['Serialized'] = (isset($fields['Serialized:']) ? $fields['Serialized:'] : false);
                 
             }
             else {
 
-                $serieInfo['episodes'] = (isset($fields['Episodes:']) ? $fields['Episodes:'] : false);
+                $serieInfo['episodes'] = (isset($fields['Episodes:']) ? intval($fields['Episodes:']) : false);
                 $serieInfo['duration'] = (isset($fields['Duration:']) ? $fields['Duration:'] : false);
                 $serieInfo['studio'] = (isset($fields['Main Work:']) ? $fields['Main Work:'] : false);
                 $serieInfo['producers'] = (isset($fields['Producers:']) ? $fields['Producers:'] : false);
@@ -114,7 +114,7 @@ class Anilist {
 
                     $serieInfo['related'][] = array(
                         'type' => $parts[1],
-                        'id' => $parts[2]
+                        'id' => intval($parts[2])
                     );
 
                 }
@@ -154,7 +154,7 @@ class Anilist {
                 $results[] = array(
                     'name' => trim($children->item(0)->nodeValue),
                     'type' => $parts[1],
-                    'id' => $parts[2]
+                    'id' => intval($parts[2])
                 );
             
             }
