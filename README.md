@@ -28,7 +28,11 @@ array(16) {
         [1]=> string(18) "Sailor Moon (2014)"
         [2]=> string(34) "Bishoujo Senshi Sailor Moon (2014)"
     }
-    ["image"]=> string(45) "http://anilist.co/img/dir/anime/reg/14751.jpg"
+     ["image"]=> array(3) {
+        ["regular"]=> string(45) "http://anilist.co/img/dir/anime/reg/14751.jpg"
+        ["medium"]=> string(45) "http://anilist.co/img/dir/anime/med/14751.jpg"
+        ["small"]=> string(45) "http://anilist.co/img/dir/anime/sml/14751.jpg"
+    }
     ["type"]=> string(3) "ONA"
     ["episodes"]=> string(2) "26"
     ["duration"]=> bool(false)

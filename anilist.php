@@ -12,7 +12,6 @@ class Anilist {
         $data = $this->_parsePage($html, array(
             'serieInfo' => '//div[@id="animeInfo"]/ul[1]/li',
             'serieDescription' => '//div[@id="animeDes"]/text()',
-            'serieImage' => '//img[@class="poster"]/@src',
             'serieRelations' => '//div[@id="animeRel"]/span/div/a'
         ));
 
@@ -75,7 +74,11 @@ class Anilist {
                 'nameJapanese' => (isset($fields['Japanese:']) ? $fields['Japanese:'] : false),
                 'nameSynonym' => $fields['Synonym:'],
                 'description' => trim($data['serieDescription']->item(1)->nodeValue),
-                'image' => 'http://anilist.co' . trim($data['serieImage']->item(0)->nodeValue),
+                'image' => array(
+                    'regular' => 'http://anilist.co/img/dir/anime/reg/' . $serieId . '.jpg',
+                    'medium' => 'http://anilist.co/img/dir/anime/med/' . $serieId . '.jpg',
+                    'small' => 'http://anilist.co/img/dir/anime/sml/' . $serieId . '.jpg'
+                ),
                 'type' => (isset($fields['Type:']) ? $fields['Type:'] : false),
                 'status' => $fields['Status:'],
                 'start' => (isset($fields['Start:']) ? $fields['Start:'] : false),
