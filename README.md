@@ -28,7 +28,7 @@ array(16) {
         [1]=> string(18) "Sailor Moon (2014)"
         [2]=> string(34) "Bishoujo Senshi Sailor Moon (2014)"
     }
-     ["image"]=> array(3) {
+    ["image"]=> array(3) {
         ["regular"]=> string(45) "http://anilist.co/img/dir/anime/reg/14751.jpg"
         ["medium"]=> string(45) "http://anilist.co/img/dir/anime/med/14751.jpg"
         ["small"]=> string(45) "http://anilist.co/img/dir/anime/sml/14751.jpg"
@@ -37,7 +37,7 @@ array(16) {
     ["episodes"]=> int(26)
     ["duration"]=> bool(false)
     ["status"]=> string(16) "currently airing"
-    ["dateStart"]=> string(10) "2014-07-05
+    ["dateStart"]=> string(10) "2014-07-05"
     ["dateEnd"]=> bool(false)
     ["studio"]=> string(14) "Toei Animation"
     ["producers"]=> array(1) {
